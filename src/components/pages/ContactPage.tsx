@@ -23,12 +23,26 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real application, this would send the form data to a server
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', company: '', email: '', topic: '', message: '' });
-    }, 5000);
+    // Post the form to our serverless API which will send the email
+    fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+      .then(async (res) => {
+        if (!res.ok) throw new Error((await res.text()) || 'Server error');
+        setSubmitted(true);
+        setTimeout(() => {
+          setSubmitted(false);
+          setFormData({ name: '', company: '', email: '', topic: '', message: '' });
+        }, 5000);
+      })
+      .catch((err) => {
+        // TODO: surface error to user in UI; for now log
+        // eslint-disable-next-line no-console
+        console.error('Failed to send contact message', err);
+        alert('Sorry — something went wrong sending your message. Please try again or email us directly at hello@govisibi.agency');
+      });
   };
 
   const handleChange = (field: string, value: string) => {

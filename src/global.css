@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -----------------------------------
+   VISIBI Base Layer & Design Tokens
+----------------------------------- */
+@layer base {
+  :root {
+    --font-size: 16px;
+    --font-weight-medium: 500;
+    --font-weight-normal: 400;
+
+    /* VISIBI Pure B&W Design Tokens */
+    --visibi-white: #FFFFFF;
+    --visibi-black: #000000;
+    --visibi-grey-light: #EAEAEA;
+    --visibi-grey-medium: #7A7A7A;
+
+    /* Simplified Color Scheme */
+    --background: #ffffff;
+    --foreground: #000000;
+    --border: #E5E5E5;
+    --muted: #666666;
+    --muted-foreground: #666666;
+    --primary: #000000;
+    --primary-foreground: #ffffff;
+    --secondary: #ffffff;
+    --secondary-foreground: #000000;
+    --accent: #000000;
+    --accent-foreground: #ffffff;
+  }
+
+  .dark {
+    --background: #111111;
+    --foreground: #fefefe;
+    --border: #333333;
+    --muted: #999999;
+    --primary: #fefefe;
+    --primary-foreground: #111111;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter;
+    font-size: var(--font-size);
+  }
+
+  /* Base typography */
+  h1, h2, h3, h4, p, label, button, input {
+    line-height: 1.5;
+  }
+
+  h1 { font-size: 1.875rem; font-weight: var(--font-weight-medium); }
+  h2 { font-size: 1.5rem;  font-weight: var(--font-weight-medium); }
+  h3 { font-size: 1.25rem; font-weight: var(--font-weight-medium); }
+  h4, p, label, button, input {
+    font-size: 1rem;
+    font-weight: var(--font-weight-normal);
+  }
+}
+
+/* VISIBI Typography Utilities */
+.font-inter {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.font-space-mono {
+  font-family: 'Space Mono', 'Courier New', monospace;
+  letter-spacing: 0.01em;
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.33%); }
+}
+.animate-marquee {
+  animation: marquee 18s linear infinite;
+}
